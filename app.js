@@ -107,7 +107,7 @@ const data = [
 
     const ids=data.map((user)=>user.id)
     let id=0
-    if(ids){
+    if(ids.length>0){
       id=Math.max(...ids)+1
     }else{
       id=1
