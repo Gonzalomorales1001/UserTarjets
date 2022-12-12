@@ -106,10 +106,11 @@ const data = [
     let avatar=document.querySelector('#imageURL').value
 
     const ids=data.map((user)=>user.id)
+    let id=0
     if(ids){
-      let id=Math.max(...ids)+1
+      id=Math.max(...ids)+1
     }else{
-      let id=1
+      id=1
     }
 
     let NewUser=new user (first_name,last_name,email,avatar,id)
