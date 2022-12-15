@@ -55,7 +55,7 @@ let defaultUsers = [
 
 let data=JSON.parse(localStorage.getItem('users'))
 
-if(data=null||data.length<1){
+if(!data||data.length<1){
   localStorage.setItem('users',JSON.stringify(defaultUsers))
   data=JSON.parse(localStorage.getItem('users'))
 }
