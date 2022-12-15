@@ -8,50 +8,57 @@ class user{
     }
 }
 
-const data = [
+let defaultUsers = [
     {
-      id: 7,
+      id: 1,
       email: "michael.lawson@reqres.in",
       first_name: "Michael",
       last_name: "Lawson",
       avatar: "https://reqres.in/img/faces/8-image.jpg",
     },
     {
-      id: 8,
+      id: 2,
       email: "lindsay.ferguson@reqres.in",
       first_name: "Lindsay",
       last_name: "Ferguson",
       avatar: "https://reqres.in/img/faces/7-image.jpg",
     },
     {
-      id: 9,
+      id: 3,
       email: "tobias.funke@reqres.in",
       first_name: "Tobias",
       last_name: "Funke",
       avatar: "https://reqres.in/img/faces/9-image.jpg",
     },
     {
-      id: 10,
+      id: 4,
       email: "byron.fields@reqres.in",
       first_name: "Byron",
       last_name: "Fields",
       avatar: "https://reqres.in/img/faces/10-image.jpg",
     },
     {
-      id: 11,
+      id: 5,
       email: "george.edwards@reqres.in",
       first_name: "George",
       last_name: "Edwards",
       avatar: "https://reqres.in/img/faces/11-image.jpg",
     },
     {
-      id: 12,
+      id: 6,
       email: "rachel.howell@reqres.in",
       first_name: "Rachel",
       last_name: "Howell",
       avatar: "https://reqres.in/img/faces/12-image.jpg",
     },
   ];
+
+let data=JSON.parse(localStorage.getItem('users'))
+
+if(data.length<1){
+  localStorage.setItem('users',JSON.stringify(defaultUsers))
+  data=JSON.parse(localStorage.getItem('users'))
+}
 
   let cards=document.querySelector('#users')
   
@@ -75,6 +82,8 @@ const data = [
         cards.appendChild(divcard)
     })
   }
+
+      ListUsers()
 
   const OrderUsers=(value=0)=>{
     data.sort((u1,u2)=>{
@@ -114,9 +123,17 @@ const data = [
     }
 
     let NewUser=new user (first_name,last_name,email,avatar,id)
+
     data.push(NewUser)
 
+    localStorage.setItem('users',JSON.stringify(data))
+
     ListUsers()
+
+    document.querySelector('#first_name').value=""
+    document.querySelector('#last_name').value=""
+    document.querySelector('#email').value=""
+    document.querySelector('#imageURL').value=""
   }
 
   const DeleteUser=(event)=>{
@@ -127,6 +144,7 @@ const data = [
     let userToDeleteIndex=data.findIndex((user)=>user===userToDelete)
     if(userToDelete){
       data.splice(userToDeleteIndex,1)
+      localStorage.setItem('users',JSON.stringify(data))
     }else{
       alert('User not found ⚠')
     }
